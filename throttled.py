@@ -223,6 +223,8 @@ MCHBAR_ADDRESS_MASKS_BY_PCI_DEVICE = {
     0x3EC4: MCHBAR_ADDRESS_MASK_39_15,
     # Comet Lake-H (Intel doc 615212; coreboot PCI_DID_INTEL_CML_H).
     0x9B54: MCHBAR_ADDRESS_MASK_39_15,
+    # Comet Lake-U (Intel doc 615229; coreboot PCI_DID_INTEL_CML_U).
+    0x9B61: MCHBAR_ADDRESS_MASK_39_15,
     # Tiger Lake (Linux igen6 tgl_cfg).
     0x9A14: MCHBAR_ADDRESS_MASK_39_17,
     # Alder Lake (Linux igen6 adl_cfg).
