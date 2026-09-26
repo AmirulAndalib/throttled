@@ -221,6 +221,17 @@ class PR394FixTests(unittest.TestCase):
                         with mock.patch.object(throttled, 'warning'):
                             self.assertEqual(throttled.read_mchbar_base(), expected)
 
+    def test_mchbar_reader_validates_the_comet_lake_u_32k_layout(self):
+        throttled = load_throttled()
+        cases = ((0x8001, 0, 0x8000), (0xFFFF8001, 0x7F, 0x7FFFFF8000), (0xC001, 0, None), (0x8001, 0x80, None))
+
+        for low, high, expected in cases:
+            with self.subTest(low=low, high=high):
+                with mock.patch.object(throttled, '_read_host_bridge_identity', return_value=(0x8086, 0x9B61)):
+                    with mock.patch.object(throttled, '_read_mchbar_dword', side_effect=(low, high) * 2):
+                        with mock.patch.object(throttled, 'warning'):
+                            self.assertEqual(throttled.read_mchbar_base(), expected)
+
     def test_mchbar_reader_validates_the_tiger_lake_128k_layout(self):
         throttled = load_throttled()
 
